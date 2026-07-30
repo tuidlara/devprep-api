@@ -7,6 +7,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/questions")
 public class QuestionController {
@@ -24,7 +26,18 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}")
-    public QuestionResponse findQuestionById(@PathVariable Long id){
+    public QuestionResponse findQuestionById(@PathVariable Long id) {
         return questionService.findById(id);
     }
+
+    @GetMapping
+    public List<QuestionResponse> listAllQuestions() {
+        return questionService.listAllQuestions();
+    }
+
+    @PutMapping("/{id}")
+    public QuestionResponse updateQuestion(@PathVariable Long id, @Valid @RequestBody QuestionRequest request) {
+        return questionService.updateQuestion(id, request);
+    }
+
 }

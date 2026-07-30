@@ -8,11 +8,11 @@ import java.time.LocalDateTime;
 @Entity
 public class Question {
 
-    protected Question(){
+    protected Question() {
 
     }
 
-    public Question(String question, String answer, Difficulty difficulty, String topic){
+    public Question(String question, String answer, Difficulty difficulty, String topic) {
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;

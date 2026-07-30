@@ -7,6 +7,8 @@ import com.arthur.devprep_api.exception.QuestionNotFoundException;
 import com.arthur.devprep_api.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class QuestionService {
 
@@ -46,6 +48,28 @@ public class QuestionService {
         Question question = questionRepository.findById(id)
                 .orElseThrow(() -> new QuestionNotFoundException("Id não encontrado"));
         return toResponse(question);
+
+    }
+
+    public List<QuestionResponse> listAllQuestions() {
+        List<Question> questions = questionRepository.findAll();
+        return questions.stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
+    public QuestionResponse updateQuestion(Long id, QuestionRequest request) {
+        Question question = questionRepository.findById(id)
+                .orElseThrow(() -> new QuestionNotFoundException("Id não encontrado"));
+
+        question.setQuestion(request.getQuestion());
+        question.setAnswer(request.getAnswer());
+        question.setDifficulty(request.getDifficulty());
+        question.setTopic(request.getTopic());
+
+        questionRepository.save(question);
+        return toResponse(question);
+
 
     }
 }
