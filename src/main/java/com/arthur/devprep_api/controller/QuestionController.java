@@ -40,4 +40,10 @@ public class QuestionController {
         return questionService.updateQuestion(id, request);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteQuestion(@PathVariable Long id) {
+        questionService.deleteQuestion(id);
+    }
+
 }

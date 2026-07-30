@@ -72,5 +72,11 @@ public class QuestionService {
 
 
     }
+
+    public void deleteQuestion(Long id) {
+        Question question = questionRepository.findById(id)
+                .orElseThrow(() -> new QuestionNotFoundException("Id não encontrado"));
+        questionRepository.delete(question);
+    }
 }
 
