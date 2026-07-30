@@ -3,6 +3,7 @@ package com.arthur.devprep_api.service;
 import com.arthur.devprep_api.dto.QuestionRequest;
 import com.arthur.devprep_api.dto.QuestionResponse;
 import com.arthur.devprep_api.entity.Question;
+import com.arthur.devprep_api.exception.QuestionNotFoundException;
 import com.arthur.devprep_api.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,13 @@ public class QuestionService {
         Question question = toEntity(request);
         Question questionSalva = questionRepository.save(question);
         return toResponse(questionSalva);
+    }
+
+    public QuestionResponse findById(Long id) {
+        Question question = questionRepository.findById(id)
+                .orElseThrow(() -> new QuestionNotFoundException("Id não encontrado"));
+        return toResponse(question);
+
     }
 }
 

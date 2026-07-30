@@ -22,4 +22,9 @@ public class QuestionController {
     public QuestionResponse createQuestion(@Valid @RequestBody QuestionRequest request) {
         return questionService.createQuestion(request);
     }
+
+    @GetMapping("/{id}")
+    public QuestionResponse findQuestionById(@PathVariable Long id){
+        return questionService.findById(id);
+    }
 }
