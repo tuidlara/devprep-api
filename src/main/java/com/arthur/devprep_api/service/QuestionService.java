@@ -1,0 +1,44 @@
+package com.arthur.devprep_api.service;
+
+import com.arthur.devprep_api.dto.QuestionRequest;
+import com.arthur.devprep_api.dto.QuestionResponse;
+import com.arthur.devprep_api.entity.Question;
+import com.arthur.devprep_api.repository.QuestionRepository;
+import org.springframework.stereotype.Service;
+
+@Service
+public class QuestionService {
+
+    private final QuestionRepository questionRepository;
+
+    public QuestionService(QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
+    }
+
+    private QuestionResponse toResponse(Question question) {
+        return new QuestionResponse(
+                question.getId(),
+                question.getQuestion(),
+                question.getAnswer(),
+                question.getDifficulty(),
+                question.getTopic(),
+                question.getCreatedAt()
+        );
+    }
+
+    private Question toEntity(QuestionRequest request) {
+        return new Question(
+                request.getQuestion(),
+                request.getAnswer(),
+                request.getDifficulty(),
+                request.getTopic()
+        );
+    }
+
+    public QuestionResponse createQuestion(QuestionRequest request) {
+        Question question = toEntity(request);
+        Question questionSalva = questionRepository.save(question);
+        return toResponse(questionSalva);
+    }
+}
+
