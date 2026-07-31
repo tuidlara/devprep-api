@@ -10,4 +10,6 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     List<Question> findByDifficulty(Difficulty difficulty);
 
+    List<Question> findByTopicContainingIgnoreCase(String topic);
+
 }

@@ -52,4 +52,9 @@ public class QuestionController {
         return questionService.listByDifficulty(difficulty);
     }
 
+    @GetMapping("/topic/{topic}")
+    public List<QuestionResponse> listByTopic(@PathVariable String topic) {
+        return questionService.listByTopic(topic);
+    }
+
 }

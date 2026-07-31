@@ -87,5 +87,12 @@ public class QuestionService {
                 .toList();
 
     }
+
+    public List<QuestionResponse> listByTopic(String topic) {
+        List<Question> questions = questionRepository.findByTopicContainingIgnoreCase(topic);
+        return questions.stream()
+                .map(this::toResponse)
+                .toList();
+    }
 }
 
