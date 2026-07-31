@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class QuestionService {
@@ -97,6 +98,18 @@ public class QuestionService {
         return questions.stream()
                 .map(this::toResponse)
                 .toList();
+    }
+
+    public QuestionResponse chooseRandomQuestion() {
+        List<Question> questions = questionRepository.findAll();
+        if (questions.isEmpty()) {
+            throw new QuestionNotFoundException("Nenhuma pergunta encontrada");
+        }
+        Random random = new Random();
+        int indice = random.nextInt(questions.size());
+        Question question = questions.get(indice);
+        return toResponse(question);
+
     }
 }
 

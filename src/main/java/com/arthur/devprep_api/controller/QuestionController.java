@@ -57,4 +57,9 @@ public class QuestionController {
         return questionService.listByTopic(topic);
     }
 
+    @GetMapping("/random")
+    public QuestionResponse chooseRandomQuestion() {
+        return questionService.chooseRandomQuestion();
+    }
+
 }
