@@ -85,19 +85,15 @@ public class QuestionService {
         questionRepository.delete(question);
     }
 
-    public List<QuestionResponse> listByDifficulty(Difficulty difficulty) {
-        List<Question> questions = questionRepository.findByDifficulty(difficulty);
-        return questions.stream()
-                .map(this::toResponse)
-                .toList();
+    public Page<QuestionResponse> listByDifficulty(Difficulty difficulty, Pageable pageable) {
+        Page<Question> questions = questionRepository.findByDifficulty(difficulty, pageable);
+        return questions.map(this::toResponse);
 
     }
 
-    public List<QuestionResponse> listByTopic(String topic) {
-        List<Question> questions = questionRepository.findByTopicContainingIgnoreCase(topic);
-        return questions.stream()
-                .map(this::toResponse)
-                .toList();
+    public Page<QuestionResponse> listByTopic(String topic, Pageable pageable) {
+        Page<Question> questions = questionRepository.findByTopicContainingIgnoreCase(topic, pageable);
+        return questions.map(this::toResponse);
     }
 
     public QuestionResponse chooseRandomQuestion() {

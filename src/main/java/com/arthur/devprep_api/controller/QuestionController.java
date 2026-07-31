@@ -10,8 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/questions")
 public class QuestionController {
@@ -50,13 +48,13 @@ public class QuestionController {
     }
 
     @GetMapping("/difficulty/{difficulty}")
-    public List<QuestionResponse> listByDifficulty(@PathVariable Difficulty difficulty) {
-        return questionService.listByDifficulty(difficulty);
+    public Page<QuestionResponse> listByDifficulty(@PathVariable Difficulty difficulty , Pageable pageable) {
+        return questionService.listByDifficulty(difficulty, pageable);
     }
 
     @GetMapping("/topic/{topic}")
-    public List<QuestionResponse> listByTopic(@PathVariable String topic) {
-        return questionService.listByTopic(topic);
+    public Page<QuestionResponse> listByTopic(@PathVariable String topic, Pageable pageable) {
+        return questionService.listByTopic(topic, pageable);
     }
 
     @GetMapping("/random")

@@ -2,14 +2,14 @@ package com.arthur.devprep_api.repository;
 
 import com.arthur.devprep_api.entity.Question;
 import com.arthur.devprep_api.enums.Difficulty;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
 
-    List<Question> findByDifficulty(Difficulty difficulty);
+    Page<Question> findByDifficulty(Difficulty difficulty, Pageable pageable);
 
-    List<Question> findByTopicContainingIgnoreCase(String topic);
+    Page<Question> findByTopicContainingIgnoreCase(String topic, Pageable pageable);
 
 }
