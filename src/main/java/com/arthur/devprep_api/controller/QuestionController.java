@@ -2,6 +2,7 @@ package com.arthur.devprep_api.controller;
 
 import com.arthur.devprep_api.dto.QuestionRequest;
 import com.arthur.devprep_api.dto.QuestionResponse;
+import com.arthur.devprep_api.enums.Difficulty;
 import com.arthur.devprep_api.service.QuestionService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -44,6 +45,11 @@ public class QuestionController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteQuestion(@PathVariable Long id) {
         questionService.deleteQuestion(id);
+    }
+
+    @GetMapping("/difficulty/{difficulty}")
+    public List<QuestionResponse> listByDifficulty(@PathVariable Difficulty difficulty) {
+        return questionService.listByDifficulty(difficulty);
     }
 
 }
