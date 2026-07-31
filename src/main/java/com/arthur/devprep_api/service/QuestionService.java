@@ -7,6 +7,7 @@ import com.arthur.devprep_api.enums.Difficulty;
 import com.arthur.devprep_api.exception.QuestionNotFoundException;
 import com.arthur.devprep_api.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class QuestionService {
         );
     }
 
+    @Transactional
     public QuestionResponse createQuestion(QuestionRequest request) {
         Question question = toEntity(request);
         Question questionSalva = questionRepository.save(question);
@@ -59,6 +61,7 @@ public class QuestionService {
                 .toList();
     }
 
+    @Transactional
     public QuestionResponse updateQuestion(Long id, QuestionRequest request) {
         Question question = questionRepository.findById(id)
                 .orElseThrow(() -> new QuestionNotFoundException("Id não encontrado"));
@@ -74,6 +77,7 @@ public class QuestionService {
 
     }
 
+    @Transactional
     public void deleteQuestion(Long id) {
         Question question = questionRepository.findById(id)
                 .orElseThrow(() -> new QuestionNotFoundException("Id não encontrado"));
