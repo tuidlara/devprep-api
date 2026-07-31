@@ -5,6 +5,8 @@ import com.arthur.devprep_api.dto.QuestionResponse;
 import com.arthur.devprep_api.enums.Difficulty;
 import com.arthur.devprep_api.service.QuestionService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +34,8 @@ public class QuestionController {
     }
 
     @GetMapping
-    public List<QuestionResponse> listAllQuestions() {
-        return questionService.listAllQuestions();
+    public Page<QuestionResponse> listAllQuestions(Pageable pageable) {
+        return questionService.listAllQuestions(pageable);
     }
 
     @PutMapping("/{id}")

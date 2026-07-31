@@ -6,6 +6,8 @@ import com.arthur.devprep_api.entity.Question;
 import com.arthur.devprep_api.enums.Difficulty;
 import com.arthur.devprep_api.exception.QuestionNotFoundException;
 import com.arthur.devprep_api.repository.QuestionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,11 +57,9 @@ public class QuestionService {
 
     }
 
-    public List<QuestionResponse> listAllQuestions() {
-        List<Question> questions = questionRepository.findAll();
-        return questions.stream()
-                .map(this::toResponse)
-                .toList();
+    public Page<QuestionResponse> listAllQuestions(Pageable pageable) {
+        Page<Question> questions = questionRepository.findAll(pageable);
+        return questions.map(this::toResponse);
     }
 
     @Transactional
