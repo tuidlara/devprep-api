@@ -112,7 +112,7 @@ http://localhost:8080/swagger-ui/index.html
 ### Clone the repository
 
 ```bash
-git clone https://github.com/your-username/devprep-api.git
+git clone https://github.com/tuidlara/devprep-api
 ```
 
 ### Navigate to the project
