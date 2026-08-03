@@ -150,5 +150,3 @@ mvn spring-boot:run
 ## Author
 
 Arthur de Lara Zilli
-
-Backend Developer Student focused on Java and Spring Boot.
