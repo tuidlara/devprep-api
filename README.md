@@ -26,7 +26,7 @@ This project was developed to practice backend development concepts such as laye
 
 ## Technologies
 
-* Java
+* Java 17
 * Spring Boot
 * Spring Web
 * Spring Data JPA
